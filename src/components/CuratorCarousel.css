@@ -1,0 +1,278 @@
+
+.container {
+  max-width: 1400px;
+}
+
+
+.container h3 {
+  font-family: "Georgia", serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+
+.carousel-item .col-md-3 {
+  padding: 20px;
+  transition: transform 0.3s ease;
+   /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); */
+}
+
+.col-md-3:hover {
+  transform: translateY(-8px);
+}
+
+
+.carousel-item img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border: 6px solid #d9c2a3;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.carousel-item h6 {
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
+}
+
+
+.carousel-item p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 0;
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  border-radius: 50%;
+  padding: 13px;
+}
+
+
+.carousel-control-prev {
+  left: -90px;
+}
+
+.carousel-control-next {
+  right: -90px;
+}
+
+@media (max-width: 992px) {
+  .carousel-item img {
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-item .col-md-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    display: none;
+  }
+}
+
+.buy-section {
+  padding: 60px 80px;
+  background-color: #f5f5f5;
+}
+
+.section-title {
+  text-align: center;
+  font-family: "Georgia", serif;
+  font-size: 28px;
+  margin-bottom: 50px;
+  font-weight: 500;
+}
+
+.paintings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.paintings-grit {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.paintings-grit a{
+  text-decoration: none;
+}
+.painting-card {
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+
+.painting-card:hover {
+  transform: translateY(-8px);
+}
+
+
+.painting-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.painting-card:hover img {
+  transform: scale(1.05);
+}
+
+.painting-card p {
+  margin-top: 15px;
+  font-size: 15px;
+  color: #444;
+  font-weight: 500;
+}
+
+
+@media (max-width: 992px) {
+  .paintings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .paintings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.features-section {
+  background-color: #f3f3f3;
+  padding: 60px 0;
+}
+
+.features-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+
+.feature-box {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+/* .feature-box:hover {
+  transform: translateY(-8px);
+} */
+
+.icon-circle {
+  width: 90px;
+  height: 90px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.icon-circle svg {
+  color: white;
+  font-size: 35px;
+}
+
+.feature-box p {
+  font-size: 16px;
+  color: #333;
+  font-family: "Georgia", serif;
+}
+
+
+@media (max-width: 768px) {
+  .features-container {
+    gap: 40px;
+  }
+}
+
+.story-section {
+  background-color: #f3f3f3;
+  padding: 80px 60px;
+}
+
+.story-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+/* Left Content */
+.story-content {
+  flex: 1;
+}
+
+.story-content h2 {
+  font-family: "Georgia", serif;
+  font-size: 32px;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.story-content p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Button */
+.story-btn {
+  background-color: black;
+  color: white;
+  padding: 12px 28px;
+  border: none;
+  letter-spacing: 2px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.story-btn:hover {
+  background-color: #444;
+}
+
+
+.story-image {
+  flex: 1;
+}
+
+.story-image img {
+  width: 110%;
+  height: 620px;
+  object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .story-container {
+    flex-direction: column;
+  }
+
+  .story-image img {
+    height: 400px;
+  }
+}
