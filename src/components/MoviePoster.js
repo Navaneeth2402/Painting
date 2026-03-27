@@ -1,23 +1,81 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./MoviePoster.css"
 import { moviedata } from '../constant/Data'
+import { useSelector ,useDispatch } from "react-redux";
+import { increment, keeppeacock } from "../redux/CountAnimalsSlice";
+import { addToCart } from "../redux/CountAnimalsSlice";
+import { FaHeart,FaRegHeart  } from "react-icons/fa";
 
 const MoviePoster = () => {
+    
+    const dispatch=useDispatch()
+    const [wishlist, setWishlist] = useState(
+    JSON.parse(localStorage.getItem("wishlist")) || []
+  );
+    const handleAddCart = (movie) => {
+  dispatch(addToCart(movie))
+
+  
+}
+ const toggleWishlist = (movie) => {
+
+  let updatedWishlist = [...wishlist];
+
+  const exists = updatedWishlist.find(
+    (item) => item.id === movie.id
+  );
+
+  if (exists) {
+    // remove
+    updatedWishlist = updatedWishlist.filter(
+      (item) => item.id !== movie.id
+    );
+  } else {
+    // add
+    updatedWishlist.push(movie);
+  }
+
+  setWishlist(updatedWishlist);
+  localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+};
+    
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     
     <div>
+
       <div className="products" >
       
      {moviedata.map((movie)=>(
-      <div className="card" id={movie.id}>
+      <div className="card" key={movie.id}>
+        <div className="img-box">
         <img src={movie.img} />
+ {
+    wishlist.some((item) => item.id === movie.id) ? (
+
+    <FaHeart
+      className="heart-icon"
+      onClick={() => toggleWishlist(movie)}
+      style={{ color: "red" }}
+    />
+
+  ) : (
+
+    <FaRegHeart
+      className="heart-icon"
+      onClick={() => toggleWishlist(movie)}
+      style={{ color: "black", background: "white", borderRadius: "50%" }}
+    />
+
+  )
+}
+    </div>
         <h4>{movie.title}</h4>
         <p className="price">{movie.p} </p>
         <div className="btn">
-        <button className="add">{movie.add}</button>
+        <button className="add"  onClick={() => handleAddCart(movie)}>{movie.add}</button>
         <button className="buy">{movie.buy}</button>
         </div>  
       </div>
@@ -25,75 +83,6 @@ const MoviePoster = () => {
      ))
     }
       
-        
-
-{/*      
-      <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Movie-Posters-Black-Frame-Harry-Potter-and-the-Prisoner-of-Azkaban-2004-Movie-Posters-Art_720x.jpg?v=1642613029"
-         
-        />
-        <h4>Harry Potter </h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div> 
-      </div>
-
-     
-      <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Movie-Posters-Black-Frame-Joker-2019-Movie-Posters-Art_720x.jpg?v=1642613109"
-         
-        />
-        <h4>Joker (2019) </h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div>
-      </div>
-
-      <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Movie-Posters-Black-Frame-Inglourious-Basterds-2009-Movie-Posters-Art_720x.jpg?v=1642613082"
-          
-        />
-        <h4>Inglourious Basterds</h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div>
-      </div>
-
-      <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Movie-Posters-Black-Frame-Fight-Club-1999-Movie-Posters-Art_720x.jpg?v=1642612868"
-         
-        />
-        <h4>Fight Club </h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div> 
-      </div>
-
-      <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Movie-Posters-Black-Frame-Once-Upon-a-Time_-in-Hollywood-_2019_-Movie-Posters-Art_720x.jpg?v=1651769792"
-      
-        />
-        <h4>Once Upon a Time in Hollywood</h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div>
-      </div> */}
-
     </div>
         
     </div>

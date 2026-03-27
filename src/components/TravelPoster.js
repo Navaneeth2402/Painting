@@ -1,9 +1,43 @@
-import React, { useEffect }  from 'react'
+import React, { useEffect,useState }  from 'react'
 import "./TravelPoster.css"
 import { traveldata } from '../constant/Data'
+import { useSelector , useDispatch} from 'react-redux'
+import { addToCart } from "../redux/CountAnimalsSlice";
+import { FaHeart,FaRegHeart } from "react-icons/fa";
 
 
 const TravelPoster = () => {
+   const dispatch=useDispatch()
+       const [wishlist, setWishlist] = useState(
+       JSON.parse(localStorage.getItem("wishlist")) || []
+     );
+       const handleAddCart = (travel) => {
+     dispatch(addToCart(travel))
+   
+     
+   }
+    const toggleWishlist = (travel) => {
+   
+     let updatedWishlist = [...wishlist];
+   
+     const exists = updatedWishlist.find(
+       (item) => item.id === travel.id
+     );
+   
+     if (exists) {
+       // remove
+       updatedWishlist = updatedWishlist.filter(
+         (item) => item.id !== travel.id
+       );
+     } else {
+       // add
+       updatedWishlist.push(travel);
+     }
+   
+     setWishlist(updatedWishlist);
+     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+   };
+      
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -13,11 +47,32 @@ const TravelPoster = () => {
           
          {traveldata.map((travel)=>(
           <div className="card" id={travel.id}>
-            <img src={travel.img} />
+              <div className="img-box">
+                  <img src={travel.img} />
+                    {
+                       wishlist.some((item) => item.id === travel.id) ? (
+                   
+                       <FaHeart
+                         className="heart-icon"
+                         onClick={() => toggleWishlist(travel)}
+                         style={{ color: "red" }}
+                       />
+                   
+                     ) : (
+                   
+                       <FaRegHeart
+                         className="heart-icon"
+                         onClick={() => toggleWishlist(travel)}
+                         style={{ color: "black", background: "white", borderRadius: "50%" }}
+                       />
+                   
+                     )
+                   }
+              </div>
             <h4>{travel.title}</h4>
             <p className="price">{travel.p} </p>
             <div className="btn">
-            <button className="add">{travel.add}</button>
+            <button className="add" onClick={() => handleAddCart(travel)}>{travel.add}</button>
             <button className="buy">{travel.buy}</button>
             </div>  
           </div>
@@ -25,74 +80,7 @@ const TravelPoster = () => {
          ))
         }
 
-      {/* <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Black-Frame-Barcelona-Spain_720x.jpg?v=1643490642"
-          
-        />
-        <h4>Spain</h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div> 
-      </div>
-
-    
-      <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Black-Frame-Dublin_720x.jpg?v=1643490982"
-        
-        />
-        <h4>Dublin</h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div>
-      </div>
-
-
-
-      <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Travel-Poster-Black-Frame-Paris-Eiffel-Travel_720x.jpg?v=1653557263"
-        />
-        <h4>Paris</h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div>
-      </div>
-
       
-      <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Black-Frame-Retro-Poster-Tamil-Nadu-India-Travel-Poster_720x.jpg?v=1643492413"
-        
-        />
-        <h4>India</h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div> 
-      </div>
-
-    
-      <div className="card">
-        <img
-          src="https://dessineart.com/cdn/shop/products/Black-Frame-England-London_720x.jpg?v=1643491046"
-          
-        />
-        <h4>London</h4>
-        <p className="price">From Rs. 199.00</p>
-        <div className="btn">
-        <button className="add">ADD TO CART</button>
-        <button className="buy">BUY IT NOW</button>
-        </div>
-      </div> */}
 
     </div>
     </div>

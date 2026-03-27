@@ -56,3 +56,39 @@ button{
   color:white;
   border:none;
 }
+
+.img-box{
+  position: relative;
+}
+
+.img-box img{
+  width: 100%;
+}
+.heart-icon{
+  position: absolute;
+  top: 10px;
+  right: -20px;
+  font-size: 26px;
+  cursor: pointer;
+  padding: 6px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.heart-icon:hover{
+  transform: scale(1.2);
+}
+.wishlist-btn{
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: white;
+  color:black ;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.wishlist-btn:hover{
+  color: white;
+  background:black;
+}

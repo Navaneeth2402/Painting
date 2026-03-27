@@ -2,12 +2,17 @@ import React from 'react'
 import "./Header.css";
 import { FaTwitter, FaFacebookF, FaInstagram, FaHeart, FaShoppingBag, FaSearch } from "react-icons/fa";
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
 const Header = () => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+  const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  setCount(wishlist.length);
+}, []);
   return (
     <div>
       <div className="header">
 
-    
       <div className="top-bar">
         <div className="social-icons">
           <FaTwitter />
@@ -30,8 +35,17 @@ const Header = () => {
 
         <div className="right-icons">
           <span>Account</span>
-          <FaHeart />
-          <FaShoppingBag />
+          <Link to="/wishlist" className="wishlist-icon">
+
+        <FaHeart />
+
+        <span className="wishlist-count"></span>
+
+         </Link>
+          <span>Cart</span>
+           <Link to="/cart">
+           <FaShoppingBag />
+           </Link> 
         </div>
       </div>
 
